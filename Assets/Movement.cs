@@ -4,11 +4,13 @@ using TMPro;
 public class Movement : MonoBehaviour
 {
     public Stats stats;
-    public float speed = 1f;
+    public float speed = 5f;
+    private float defaultSpeed;   
     private SpriteRenderer spriteRenderer;
     void Start()
     {
-       spriteRenderer = GetComponent<SpriteRenderer>(); 
+       spriteRenderer = GetComponent<SpriteRenderer>();
+       defaultSpeed = speed;
     }
 
   
@@ -35,28 +37,55 @@ public class Movement : MonoBehaviour
         {
             transform.position = new Vector2(-7f, transform.position.y);
             stats.AddScore(1);
-            stats.StartCoroutine(stats.invincibleCoroutine(3f));
+
+            if (!stats.isInvincible)
+            {
+                stats.StartCoroutine(stats.invincibleCoroutine(3f));
+            }
+
+            speed = Mathf.Min(speed * 2f, 10f);
         }
 
+        
         if (transform.position.x < -9)
         {
             transform.position = new Vector2(7f, transform.position.y);
             stats.AddScore(1);
-            stats.StartCoroutine(stats.invincibleCoroutine(3f));
+
+            if (!stats.isInvincible)
+            {
+                stats.StartCoroutine(stats.invincibleCoroutine(3f));
+            }
+
+            speed = Mathf.Min(speed * 2f, 10f);
         }
 
+        
         if (transform.position.y > 5)
         {
             transform.position = new Vector2(transform.position.x, -3);
             stats.AddScore(1);
-            stats.StartCoroutine(stats.invincibleCoroutine(3f));
+
+            if (!stats.isInvincible)
+            {
+                stats.StartCoroutine(stats.invincibleCoroutine(3f));
+            }
+
+            speed = Mathf.Min(speed * 2f, 10f);
         }
 
+        
         if (transform.position.y < -5)
         {
             transform.position = new Vector2(transform.position.x, 3);
             stats.AddScore(1);
-            stats.StartCoroutine(stats.invincibleCoroutine(3f));
+
+            if (!stats.isInvincible)
+            {
+                stats.StartCoroutine(stats.invincibleCoroutine(3f));
+            }
+
+            speed = Mathf.Min(speed * 2f, 10f);
         }
         
 
